@@ -1,9 +1,11 @@
 package com.nameisjayant.amazonandroidcloneapp.common
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -11,11 +13,16 @@ import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.nameisjayant.amazonandroidcloneapp.R
 
 
@@ -26,35 +33,40 @@ fun AppSearchView(
     onValueChange: (String) -> Unit
 ) {
 
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, Color.Gray)
-    ) {
-        TextField(
-            value = search, onValueChange = { onValueChange(it) },
-            placeholder = { Text(text = stringResource(R.string.search_amazon_in)) },
-            leadingIcon = {
-                Icon(
-                    Icons.Default.Search,
-                    contentDescription = "",
-                    tint = Color.DarkGray
-                )
-            },
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent
-            ),
-            trailingIcon = {
-                Icon(
-                    Icons.Default.QrCodeScanner,
-                    contentDescription = "",
-                    tint = Color.DarkGray
-                )
+    BasicTextField(
+        value = search,
+        onValueChange = { onValueChange(it) },
+        modifier = modifier
+            .fillMaxWidth()
+            .background(Color.White, RoundedCornerShape(8.dp))
+        ,
+        singleLine = true,
+        cursorBrush = SolidColor(MaterialTheme.colors.primary),
+        textStyle = LocalTextStyle.current.copy(
+            color = MaterialTheme.colors.onSurface,
+            fontSize = 16.sp
+        ),
+        decorationBox = { innerTextField ->
+            Row(
+                modifier,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(Icons.Default.Search, contentDescription = "")
+                Box(Modifier.weight(1f).padding(start = 10.dp)) {
+                    if (search.isEmpty()) Text(
+                        "Search Amazon.in",
+                        style = LocalTextStyle.current.copy(
+                            color = Color.DarkGray,
+                            fontSize = 14.sp,
+                        )
+                    )
+                    innerTextField()
+                }
+                Icon(Icons.Default.QrCode, contentDescription = "")
             }
-        )
-    }
+        }
+    )
+
 
 }
 

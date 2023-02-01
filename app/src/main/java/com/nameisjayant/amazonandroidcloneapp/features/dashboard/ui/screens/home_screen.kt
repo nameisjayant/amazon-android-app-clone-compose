@@ -16,6 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.nameisjayant.amazonandroidcloneapp.common.AppIconButtonFromImageVector
 import com.nameisjayant.amazonandroidcloneapp.common.AppSearchView
+import com.nameisjayant.amazonandroidcloneapp.ui.theme.HeaderColor
+import com.nameisjayant.amazonandroidcloneapp.ui.theme.Teal200
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -28,7 +30,7 @@ fun HomeScreen() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.Cyan.copy(alpha = 0.2f))
+                .background(HeaderColor)
         ) {
             AppSearchView(
                 search = search,
