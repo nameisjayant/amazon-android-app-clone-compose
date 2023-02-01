@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Amazon android clone app</string>
+    <string name="search_amazon_in">Search Amazon.in</string>
 </resources>
