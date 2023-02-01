@@ -21,9 +21,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nameisjayant.amazonandroidcloneapp.R
+import com.nameisjayant.amazonandroidcloneapp.ui.theme.Teal200
 
 
 @Composable
@@ -38,10 +40,9 @@ fun AppSearchView(
         onValueChange = { onValueChange(it) },
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.White, RoundedCornerShape(8.dp))
-        ,
+            .background(Color.White, RoundedCornerShape(8.dp)),
         singleLine = true,
-        cursorBrush = SolidColor(MaterialTheme.colors.primary),
+        cursorBrush = SolidColor(Teal200),
         textStyle = LocalTextStyle.current.copy(
             color = MaterialTheme.colors.onSurface,
             fontSize = 16.sp
@@ -52,7 +53,11 @@ fun AppSearchView(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(Icons.Default.Search, contentDescription = "")
-                Box(Modifier.weight(1f).padding(start = 10.dp)) {
+                Box(
+                    Modifier
+                        .weight(1f)
+                        .padding(start = 10.dp)
+                ) {
                     if (search.isEmpty()) Text(
                         "Search Amazon.in",
                         style = LocalTextStyle.current.copy(
@@ -93,4 +98,18 @@ fun AppIconButtonFromImageVector(
     IconButton(onClick = { onClick() }, modifier = modifier.size(24.dp)) {
         Icon(imageVector = icon, contentDescription = "", tint = tint)
     }
+}
+
+@Composable
+fun SpacerHeight(
+    height: Dp = 5.dp
+) {
+    Spacer(modifier = Modifier.height(height))
+}
+
+@Composable
+fun SpacerWidth(
+    width: Dp = 5.dp
+) {
+    Spacer(modifier = Modifier.width(width))
 }
